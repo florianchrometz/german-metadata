@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const germanMetadata = require('../german-metadata').default;
+const germanMetadata = require('../german-metadata');
 
 describe('German Metadata Package', function () {
   it('should normalize city names correctly', function () {
