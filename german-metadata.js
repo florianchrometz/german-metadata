@@ -7,7 +7,7 @@ const cities = require('./cities.json');
  * @returns {object} The city object or null if not found
  */
 function getCityByPhoneNumber(phonenumber) {
-  const prefixForNormalizedPhoneNumber = getPrefixOfPhoneNumber(normalizePhoneNumber(phonenumber));
+  const prefixForNormalizedPhoneNumber = getPrefixOfPhoneNumber(phonenumber);
   if (prefixForNormalizedPhoneNumber) {
     return getCityByPhonePrefix(prefixForNormalizedPhoneNumber);
   }
@@ -50,11 +50,11 @@ function getPhonePrefixByCityName(cityname) {
  */
 function getPrefixOfPhoneNumber(phonenumber) {
   const normalizedNumber = normalizePhoneNumber(phonenumber);
-  const prefixLengths = [5, 4, 3, 2]; // Check prefixes of length 5, 4, 3, and 2 digits
+  const prefixLengths = [5, 4, 3, 2];
 
   for (const length of prefixLengths) {
     const prefix = Number(normalizedNumber.substring(0, length));
-    const city = find((p) => p.vorwahl === prefix);
+    const city = cities.find((p) => p.prefix === prefix);
     if (city) {
       return city.prefix;
     }
@@ -91,8 +91,13 @@ function normalizePhoneNumber(phonenumber) {
     .replace(/^0/, '')
     .replace(/^00/, '')
     .replace(/^\+/, '')
+    .replace(/^\(/, '')
+    .replace(/^\)/, '')
     .replace(/^0049/, '')
-    .replace(/^049/, '');
+    .replace(/^049/, '')
+    .replace(/^49/, '')
+    .replace(/^0/, '')
+    .replace(/^00/, '');
 }
 
 /**
@@ -105,5 +110,5 @@ module.exports = {
   getPrefixOfPhoneNumber,
   normalizeCityName,
   normalizePhoneNumber,
-  rawCityArray: () => cities,
+  cities,
 };

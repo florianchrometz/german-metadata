@@ -1,6 +1,6 @@
 {
   "name": "german-metadata",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A js package for easy consumption of german metadata such as phone prefixes and city names.",
   "main": "german-metadata.js",
   "scripts": {

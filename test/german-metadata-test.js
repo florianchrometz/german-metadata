@@ -7,11 +7,11 @@ describe('German Metadata Package', function () {
   });
 
   it('should normalize phone numbers correctly', function () {
-    expect(germanMetadata.normalizePhoneNumber('+49 (0) 4171-492482')).to.equal('494171492482');
+    expect(germanMetadata.normalizePhoneNumber('+49 (0) 4171-492482')).to.equal('4171492482');
   });
 
   it('should find a city by phone number', function () {
-    const city = germanMetadata.getCityByPhoneNumber('+49 (0) 4171-492482');
+    const city = germanMetadata.getCityByPhoneNumber('+49 (0) 6971-492482');
     expect(city.name).to.equal('Frankfurt am Main');
   });
 
@@ -26,7 +26,7 @@ describe('German Metadata Package', function () {
   });
 
   it('should find the phone prefix of a phone number', function () {
-    const prefix = germanMetadata.getPrefixOfPhoneNumber('+49 (0) 4171-492482');
-    expect(prefix).to.equal(49);
+    const prefix = germanMetadata.getPrefixOfPhoneNumber('+49 (0) 6971-492482');
+    expect(prefix).to.equal(69);
   });
 });
