@@ -1,5 +1,4 @@
 .vscode
-package-lock.json
 *.local.js
 
 # Logs
