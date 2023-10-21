@@ -1,3 +1,5 @@
+'use strict';
+
 // City data array (Sample data for Frankfurt am Main)
 const cities = require('./cities.json');
 
