@@ -59,7 +59,6 @@ function getPrefixOfPhoneNumber(phonenumber) {
       return city.prefix;
     }
   }
-
   return null;
 }
 
@@ -71,13 +70,13 @@ function getPrefixOfPhoneNumber(phonenumber) {
 function normalizeCityName(cityname) {
   return cityname
     .toLowerCase()
-    .replace(/ä/g, 'ae')
-    .replace(/ö/g, 'oe')
-    .replace(/ü/g, 'ue')
-    .replace(/ß/g, 'ss')
-    .replace(/ /g, '_')
-    .replace(/\./g, '__')
-    .replace(/-/g, '___');
+    .replaceAll(/ä/g, 'ae')
+    .replaceAll(/ö/g, 'oe')
+    .replaceAll(/ü/g, 'ue')
+    .replaceAll(/ß/g, 'ss')
+    .replaceAll(/ /g, '_')
+    .replaceAll(/\./g, '__')
+    .replaceAll(/-/g, '___');
 }
 
 /**
