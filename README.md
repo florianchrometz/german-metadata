@@ -84,3 +84,15 @@ This allows direct access to the data that is used by this package and returns t
 ```const germanCities = geme.rawCityArray()
 
 ```
+
+# Licensing Information
+
+## Project Code License
+
+As per the terms of this project's license, the project code is released under the MIT License. You can find the full text of the MIT License in the `LICENSE` file within this repository.
+
+## Attribution to OpenStreetMap
+
+A significant portion of the data in this package is based on the Open Database License (ODbL) as provided by OpenStreetMap.
+
+- OpenStreetMap: [https://www.openstreetmap.org](https://www.openstreetmap.org)
