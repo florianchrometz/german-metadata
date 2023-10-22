@@ -32,7 +32,7 @@ describe('German Metadata Package', function () {
 
   //normalizeCityName
   it('normalizeCityName', function () {
-    expect(germanMetadata.normalizeCityName('Frankfurt am Main')).to.equal('frankfurt_am_main');
+    expect(germanMetadata.normalizeCityName('Frankfurt am Main')).to.equal('frankfurtammain');
   });
 
   //normalizePhoneNumber

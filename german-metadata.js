@@ -90,9 +90,13 @@ function normalizeCityName(cityname) {
     .replaceAll(/ö/g, 'oe')
     .replaceAll(/ü/g, 'ue')
     .replaceAll(/ß/g, 'ss')
-    .replaceAll(/ /g, '_')
-    .replaceAll(/\./g, '__')
-    .replaceAll(/-/g, '___');
+    .replaceAll(/ /g, '')
+    .replaceAll(/\//g, '')
+    .replaceAll(/\(/g, '')
+    .replaceAll(/\)/g, '')
+    .replaceAll(/\./g, '_')
+    .replaceAll(/\,/g, '_')
+    .replaceAll(/-/g, '__');
 }
 
 /**
