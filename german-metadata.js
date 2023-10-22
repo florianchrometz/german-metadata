@@ -53,7 +53,6 @@ function getPhonePrefixByCityName(cityname) {
 function getPrefixOfPhoneNumber(phonenumber) {
   const normalizedNumber = normalizePhoneNumber(phonenumber);
   const prefixLengths = [5, 4, 3, 2];
-
   for (const length of prefixLengths) {
     const prefix = Number(normalizedNumber.substring(0, length));
     const city = cities.find((p) => p.prefix === prefix);
