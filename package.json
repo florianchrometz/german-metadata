@@ -9,8 +9,16 @@
   "keywords": [
     "german",
     "metadata",
-    "phone prefixes",
-    "city names"
+    "phone",
+    "telefon",
+    "number",
+    "nummer",
+    "prefix",
+    "vorwahl",
+    "city",
+    "stadt",
+    "name",
+    "namen"
   ],
   "author": "Florian Chrometz",
   "license": "MIT",
