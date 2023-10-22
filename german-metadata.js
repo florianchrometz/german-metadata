@@ -1,7 +1,7 @@
 'use strict';
 
 // City data array (Sample data for Frankfurt am Main)
-const cities = require('./cities.json');
+const cities = require('./data/cities.json');
 
 /**
  * Function to get a city object by phone number
@@ -65,6 +65,21 @@ function getPrefixOfPhoneNumber(phonenumber) {
 }
 
 /**
+ * Function to validate if a city exists by name (only major cities, no villages)
+ * @param {string} cityname - German city name
+ * @returns {bool} Indicator if city exists
+ */
+function doesCityExistWithName(cityname) {
+  const normalizedCityName = normalizeCityName(cityname);
+  for (const city of cities) {
+    if (city.normalized.name === normalizedCityName) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
  * Helper function to normalize city names
  * @param {string} cityname - Any german city name
  * @returns {string} Normalized cityname
@@ -109,6 +124,7 @@ module.exports = {
   getCityByPhonePrefix,
   getPhonePrefixByCityName,
   getPrefixOfPhoneNumber,
+  doesCityExistWithName,
   normalizeCityName,
   normalizePhoneNumber,
   cities,
