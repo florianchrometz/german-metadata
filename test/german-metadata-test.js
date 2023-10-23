@@ -4,8 +4,8 @@ const germanMetadata = require('../german-metadata');
 describe('German Metadata Package', function () {
   //getCityByPhoneNumber
   it('getCityByPhoneNumber', function () {
-    expect(germanMetadata.getCityByPhoneNumber('+49 (0) 6971-492482').name).to.equal(
-      'Frankfurt am Main',
+    expect(germanMetadata.getCityByPhoneNumber('+49 (0) 7524-492482').name).to.equal(
+      'Gosheim',
     );
   });
 
@@ -32,7 +32,7 @@ describe('German Metadata Package', function () {
 
   //normalizeCityName
   it('normalizeCityName', function () {
-    expect(germanMetadata.normalizeCityName('Frankfurt am Main')).to.equal('frankfurtammain');
+    expect(germanMetadata.normalizeCityName('Frankfurt am Main')).to.equal('frankfurt1am1main');
   });
 
   //normalizePhoneNumber

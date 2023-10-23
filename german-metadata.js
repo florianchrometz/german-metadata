@@ -23,7 +23,7 @@ function getCityByPhoneNumber(phonenumber) {
  */
 function getCityByPhonePrefix(prefix) {
   for (const city of cities) {
-    if (city.prefix === prefix) {
+    if (city.phonePrefix === prefix) {
       return city;
     }
   }
@@ -38,8 +38,8 @@ function getCityByPhonePrefix(prefix) {
 function getPhonePrefixByCityName(cityname) {
   const normalizedCityName = normalizeCityName(cityname);
   for (const city of cities) {
-    if (city.normalized.name === normalizedCityName) {
-      return city.prefix;
+    if (city.identifiable.name === normalizedCityName) {
+      return city.phonePrefix;
     }
   }
   return null;
@@ -55,9 +55,9 @@ function getPrefixOfPhoneNumber(phonenumber) {
   const prefixLengths = [5, 4, 3, 2];
   for (const length of prefixLengths) {
     const prefix = Number(normalizedNumber.substring(0, length));
-    const city = cities.find((p) => p.prefix === prefix);
+    const city = cities.find((p) => p.phonePrefix === prefix);
     if (city) {
-      return city.prefix;
+      return city.phonePrefix;
     }
   }
   return null;
@@ -71,7 +71,7 @@ function getPrefixOfPhoneNumber(phonenumber) {
 function doesCityExistWithName(cityname) {
   const normalizedCityName = normalizeCityName(cityname);
   for (const city of cities) {
-    if (city.normalized.name === normalizedCityName) {
+    if (city.identifiable.name === normalizedCityName) {
       return true;
     }
   }
