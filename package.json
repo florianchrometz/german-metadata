@@ -1,7 +1,7 @@
 {
   "name": "german-metadata",
-  "version": "1.0.3",
-  "description": "A js package for easy consumption of german metadata such as phone prefixes and city names.",
+  "version": "2.0.0",
+  "description": "A js package for easy consumption of german metadata such as city names, postcodes, phone prefixes and states.",
   "main": "german-metadata.js",
   "scripts": {
     "test": "mocha"
@@ -9,6 +9,7 @@
   "keywords": [
     "german",
     "metadata",
+    "deutsch",
     "phone",
     "telefon",
     "number",
@@ -18,7 +19,13 @@
     "city",
     "stadt",
     "name",
-    "namen"
+    "namen",
+    "state",
+    "bundesland",
+    "post",
+    "code",
+    "plz",
+    "postleitzahl"
   ],
   "author": "Florian Chrometz",
   "license": "MIT",
