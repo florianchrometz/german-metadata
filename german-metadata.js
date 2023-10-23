@@ -31,49 +31,67 @@ const ALL_PHONE_PREFIXES = [...new Set(ALL_CITIES.map((city) => city.phonePrefix
 
 /**
  * Function to get city object by city name
- * @param {string} cityName - Any german city name
+ * @param {string} cityName - Any german city name, will be made identifiable for comparison
  * @returns {object} - City object or null if not found
  */
-function getCityByName(cityName) {}
+function getCityByName(cityName) {
+  const identifiableCityName = createIdentifiableCityOrStateName(cityName);
+  return (
+    ALL_CITIES.find(
+      (city) => createIdentifiableCityOrStateName(city.name) === identifiableCityName,
+    ) || null
+  );
+}
 
 /**
  * Function to get city objects by postal code
  * @param {string} postalCode - Postal code in any german format
  * @returns {array<object>} - Array if matching city objects or null if not found
  */
-function getCitiesByPostalCode(postalCode) {}
+function getCitiesByPostalCode(postalCode) {
+  return ALL_CITIES.filter((city) => city.postalCodes.includes(postalCode)) || null;
+}
 
 /**
  * Function to get city objects by state
- * @param {string} state - Any german state name
+ * @param {string} state - Any german state name, will be made identifiable for comparison
  * @returns {array<object>} - Array if matching city objects or null if not found
  */
-function getCitiesByState(state) {}
+function getCitiesByState(state) {
+  const identifiableState = createIdentifiableCityOrStateName(state);
+  return (
+    ALL_CITIES.filter(
+      (city) => createIdentifiableCityOrStateName(city.state) === identifiableState,
+    ) || null
+  );
+}
 
 /**
  * Function to get a city objects by phone prefix
  * @param {number} phonePrefix - Phone prefix with no trailing 0
  * @returns {array<object>} - Array if matching city objects or null if not found
  */
-function getCitiesByPhonePrefix(phonePrefix) {}
+function getCitiesByPhonePrefix(phonePrefix) {
+  return ALL_CITIES.filter((city) => city.phonePrefix === phonePrefix) || null;
+}
 
 /**
  * Function to get a city objects by phone number
- * @param {string} phoneNumber - Phonenumber in any german format
+ * @param {string} phoneNumber - Phonenumber in any german format, will be made identifiable for comparison
  * @returns {array<object>} - Array if matching city objects or null if not found
  */
 function getCitiesByPhoneNumber(phoneNumber) {}
 
 /**
  * Function to get postal code by city name
- * @param {string} cityName - Any german city name
+ * @param {string} cityName - Any german city name, will be made identifiable for comparison
  * @returns {array<string>} - Postal codes or null if not found
  */
 function getPostalCodesByCityName(cityName) {}
 
 /**
  * Function to get postal codes by state
- * @param {string} state - Any german state name
+ * @param {string} state - Any german state name, will be made identifiable for comparison
  * @returns {array<string>} - Postal codes or null if not found
  */
 function getPostalCodesByState(state) {}
@@ -87,14 +105,14 @@ function getPostalCodesByPhonePrefix(phonePrefix) {}
 
 /**
  * Function to get postal codes by phone number
- * @param {string} phoneNumber - Phonenumber in any german format
+ * @param {string} phoneNumber - Phonenumber in any german format, will be made identifiable for comparison
  * @returns {array<string>} - Postal codes or null if not found
  */
 function getPostalCodesByPhoneNumber(phoneNumber) {}
 
 /**
  * Function to get state by city name
- * @param {string} cityName - Any german city name
+ * @param {string} cityName - Any german city name, will be made identifiable for comparison
  * @returns {string} - State name or null if not found
  */
 function getStateByCityName(cityName) {}
@@ -115,15 +133,15 @@ function getStateByPhonePrefix(phonePrefix) {}
 
 /**
  * Function to get state by phone number
- * @param {string} phoneNumber - Phonenumber in any german format
+ * @param {string} phoneNumber - Phonenumber in any german format, will be made identifiable for comparison
  * @returns {string} - State name or null if not found
  */
 function getStateByPhoneNumber(phoneNumber) {}
 
 /**
  * Function to get phone prefix by city name
- * @param {string} cityName - Any german city name
- * @returns {number} - Phone prefix or null if not found
+ * @param {string} cityName - Any german city name, will be made identifiable for comparison
+ * @returns {number} - Phone prefix or 0 if not found
  */
 function getPhonePrefixByCityName(cityName) {}
 
@@ -136,21 +154,21 @@ function getPhonePrefixesByPostalCode(postalCode) {}
 
 /**
  * Function to get phone prefixes by state
- * @param {string} state - Any german state name
+ * @param {string} state - Any german state name, will be made identifiable for comparison
  * @returns {array<number>} - Phone prefixes or null if not found
  */
 function getPhonePrefixesByState(state) {}
 
 /**
  * Function to get phone prefix by phone number
- * @param {string} phoneNumber - Phonenumber in any german format
- * @returns {number} - Phone prefix or null if not found
+ * @param {string} phoneNumber - Phonenumber in any german format, will be made identifiable for comparison
+ * @returns {number} - Phone prefix or 0 if not found
  */
 function getPrefixByPhoneNumber(phoneNumber) {}
 
 /**
  * Function to validate if city name exists
- * @param {string} cityName - Any german city name
+ * @param {string} cityName - Any german city name, will be made identifiable for comparison
  * @returns {boolean} - true if city name exists, false if not
  */
 function existsCityName(cityname) {}
@@ -164,7 +182,7 @@ function existsPostalCode(postalCode) {}
 
 /**
  * Function to validate if state exists
- * @param {string} state - Any german state name
+ * @param {string} state - Any german state name, will be made identifiable for comparison
  * @returns {boolean} - true if state exists, false if not
  */
 function existsState(state) {}
@@ -199,11 +217,11 @@ function createIdentifiableCityOrStateName(cityOrStateName) {
 
 /**
  * Function to create identifiable phone number
- * @param {string} phonenumber - Any german phone number
+ * @param {string} phoneNumber - Any german phone number
  * @returns {string} Identifiable phonenumber
  */
-function createIdentifiablePhoneNumber(phonenumber) {
-  return phonenumber
+function createIdentifiablePhoneNumber(phoneNumber) {
+  return toString(phoneNumber)
     .replace(/\D/g, '')
     .replace(/^0/, '')
     .replace(/^00/, '')
