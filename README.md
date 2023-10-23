@@ -35,6 +35,10 @@ const cityForNumber = germanMetadata.getCityByPhoneNumber('069472111');
 // output will be a city object for Munich
 const cityForPrefix = germanMetadata.getCityByPhonePrefix(89);
 
+//get phone prefix by city name, city name must be a string
+// output will be a number
+const phonePrefixByCity = germanMetadata.getPhonePrefixByCityName('Frankfurt am Main');
+
 // get the specific number only prefix for a non cleaned phone number
 // output will be 69 as number
 const prefixForPhoneNumber = germanMetadata.getPrefixOfPhoneNumber('069472111');
@@ -42,6 +46,20 @@ const prefixForPhoneNumber = germanMetadata.getPrefixOfPhoneNumber('069472111');
 // validate if a city name is valid
 // output will be true
 const isValidCityName = germanMetadata.doesCityExistWithName('Frankfurt am Main');
+
+// normalize city names,
+// output will be a normalized city name string
+const validCityName = germanMetadata.normalizeCityName('Frankfurt am Main');
+
+
+// normalize phone number,
+// output will be a normalized phone number as string
+const validPhoneNumber = germanMetadata.normalizePhoneNumber('069472111')
+
+
+//This gives access to the original cities data being used
+const cities = germanMetadata.cities
+
 ```
 
 # Functions
