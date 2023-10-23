@@ -1,14 +1,15 @@
 # german-metadata
 
-A js package for easy consumption of german metadata such as phone prefixes and city names in german language with given special characters.
+A js package for easy consumption of german metadata such as phone prefixes and city names in german language with given special characters. This package uses data from OpenStreetMap and German GovData, please see chapter `Licensing Information` for more details.
 
-# Usage
+---
+## Usage
 
 ```
 npm install german-metadata
 ```
 
-## City objects
+### City objects
 
 The german meta data package is based on an array that consists of single city objects and a set of functions that allows to query them. Here is a basic city object sample for Frankfurt am Main. If a functions states to return a city object, this is what you will get.
 
@@ -22,110 +23,88 @@ The german meta data package is based on an array that consists of single city o
 }
 ```
 
-## Samples
+### Samples
 
 ```js
 const germanMetadata = require('german-metadata');
 
 // get city by phone number, phone number does not need to be prepared
 // output will be a city object for Frankfurt am Main
-const cityForNumber = germanMetadata.getCityByPhoneNumber('069472111');
+germanMetadata.getCityByPhoneNumber('069472111');
+-> "Frankfurt am Main"
 
 // get city by phone prefix, prefix must be a number without leading 0
-// output will be a city object for Munich
-const cityForPrefix = germanMetadata.getCityByPhonePrefix(89);
+germanMetadata.getCityByPhonePrefix(89);
+-> "München"
 
 //get phone prefix by city name, city name must be a string
-// output will be a number
-const phonePrefixByCity = germanMetadata.getPhonePrefixByCityName('Frankfurt am Main');
+germanMetadata.getPhonePrefixByCityName('Frankfurt am Main');
+-> 69
 
 // get the specific number only prefix for a non cleaned phone number
-// output will be 69 as number
-const prefixForPhoneNumber = germanMetadata.getPrefixOfPhoneNumber('069472111');
+germanMetadata.getPrefixOfPhoneNumber('069472111');
+-> 69
 
 // validate if a city name is valid
-// output will be true
-const isValidCityName = germanMetadata.doesCityExistWithName('Frankfurt am Main');
-
-// normalize city names,
-// output will be a normalized city name string
-const validCityName = germanMetadata.normalizeCityName('Frankfurt am Main');
-
-
-// normalize phone number,
-// output will be a normalized phone number as string
-const validPhoneNumber = germanMetadata.normalizePhoneNumber('069472111')
-
+germanMetadata.doesCityExistWithName('Frankfurt am Main');
+-> true
 
 //This gives access to the original cities data being used
-const cities = germanMetadata.cities
+germanMetadata.cities
+-> [{cities}]
 
 ```
+---
+## Functions
 
-# Functions
-
-## find entries in data
-
-### `getCityByPhoneNumber(phonenumber)` -> `Object:City`
+### getCityByPhoneNumber(phonenumber) -> Object:City
 
 This function takes a phone number as input and returns the corresponding city object. The input phone number is normalized before the lookup.
 
-### `getCityByPhonePrefix(prefix)` -> `Object:City`
+### getCityByPhonePrefix(prefix)` -> Object:City
 
 This function takes a phone prefix (area code) as input and returns the corresponding city object.
 
-### `getPhonePrefixByCityName(cityname)` -> `Number:Prefix`
+### getPhonePrefixByCityName(cityname) -> Number:Prefix
 
 This function takes a city name as input and returns the phone prefix (area code) associated with that city. The input city name is normalized before the lookup.
 
-### `getPrefixOfPhoneNumber(phonenumber)` -> `Number:Prefix`
+### getPrefixOfPhoneNumber(phonenumber) -> Number:Prefix
 
 This function takes a phone number as input and returns the phone prefix (area code) of that phone number. The input phone number is normalized before the lookup.
 
-### `doesCityExistWithName(cityname)` -> `Boolean`
+### doesCityExistWithName(cityname) -> Boolean
 
 This function takes a city name as input and returns true if the city exists in the data set. The input city name is normalized before the lookup.
 
-## Helper Functions
-
-### `normalizeCityName(cityname)` -> Returns string representing a normalized city name
+### normalizeCityName(cityname) -> String:Normalized Name
 
 Expects a city name as string without any further preparation and normalizes it to a standard, comparable, format being all lowercase, no space, no special character version of the city name.
-Characters will be replaced with given schema: `Ää` -> `ae`, `Öö` -> `oe`, `Üü` -> `ue`, `ß` -> `ss`, ` ` -> `_`, `.` -> `__`, `-` -> `___`
 
-- `normalizeCityName("Berlin")` -> `berlin`
-- `normalizeCityName("München")` -> `muenchen`
-- `normalizeCityName("Fürstenberg Havel")` -> `fuerstenberg_havel`
-- `normalizeCityName("Bergholz-Rehbrücke")` -> `bergholz___rehbruecke`
+### normalizePhoneNumber(phonenumber) -> String:Normalized Phone Number
 
-### `normalizePhoneNumber(phonenumber)` -> Returns a number representing a normalized phone number
+Expects a phone number in any known german format as string without any further preparation and normalizes it to s standard, comparable, format.
 
-Expects a phone number in any known german format as string without any further preparation and normalizes it to s standard, comparable, format
-Every character that is not `0`,`1`,`2`,`3`,`4`,`5`,`6`,`7`,`8`,`9` as well as leading `0`'s or leading country code `49` are removed.
-
-- `normalizePhoneNumber("+49 (0) 4171-492482")` -> `4171492482`
-- `normalizePhoneNumber("07171492482")` -> `7171492482`
-- `normalizePhoneNumber("0049671-492482#433,222")` -> `671492482433222`
-
-### `cities` -> `[{...}]`
+### cities -> [{...}]
 
 This allows direct access to the data that is used by this package and returns the contents of `cities.json` which represents an array of cities.
 
-# Licensing Information
+---
+## Licensing Information
 
 Make sure to apply propper attribution when using this package in public facing projects. As this project is using data from OpenStreetMap and German GovData Portal, the following licensing information applies:
 
-## Project Code License
+### Project Code License
 
 As per the terms of this project's license, the project code is released under the MIT License. You can find the full text of the MIT License in the `LICENSE` file within this repository.
 
-## Attribution to OpenStreetMap
+### Attribution to OpenStreetMap
 
 This package is using data provided by OpenStreetMap based on the Open Database License (ODbL).
 
 - OpenStreetMap: [https://www.openstreetmap.org](https://www.openstreetmap.org)
 
-## Attribution to GovData
+### Attribution to GovData
 
 This package is using data provided by GovData based on the German Data License (dl-de-by-2.0).
 
