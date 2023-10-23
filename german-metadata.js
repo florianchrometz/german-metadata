@@ -4,26 +4,41 @@
 const cities = require('./data/cities.json');
 
 /**
- * Function to get a city object by phone number
- * @param {string} phonenumber - Phonenumber in any german format, will be normalized
- * @returns {object} The city object or null if not found
+ * Function to get city object by city name
+ * @param {string} cityName - Any german city name
+ * @returns {object} - City object or null if not found
  */
-function getCityByPhoneNumber(phonenumber) {
-  const prefixForNormalizedPhoneNumber = getPrefixOfPhoneNumber(phonenumber);
-  if (prefixForNormalizedPhoneNumber) {
-    return getCityByPhonePrefix(prefixForNormalizedPhoneNumber);
-  }
-  return null;
-}
+function getCityByName(cityName) {}
 
 /**
- * Function to get a city object by phone prefix
- * @param {number} prefix - Phone prefix with no trailing 0
- * @returns {object} The city object or null if not found
+ * Function to get city objects by postal code
+ * @param {string} postalCode - Postal code in any german format
+ * @returns {array<object>} - Array if matching city objects or null if not found
  */
-function getCityByPhonePrefix(prefix) {
+function getCitiesByPostalCode(postalCode) {}
+
+/**
+ * Function to get city objects by state
+ * @param {string} state - Any german state name
+ * @returns {array<object>} - Array if matching city objects or null if not found
+ */
+function getCitiesByState(state) {}
+
+/**
+ * Function to get a city objects by phone number
+ * @param {string} phoneNumber - Phonenumber in any german format
+ * @returns {array<object>} - Array if matching city objects or null if not found
+ */
+function getCitiesByPhoneNumber(phoneNumber) {}
+
+/**
+ * Function to get a city objects by phone prefix
+ * @param {number} phonePrefix - Phone prefix with no trailing 0
+ * @returns {array<object>} - Array if matching city objects or null if not found
+ */
+function getCitiesByPhonePrefix(phonePrefix) {
   for (const city of cities) {
-    if (city.phonePrefix === prefix) {
+    if (city.phonePrefix === phonePrefix) {
       return city;
     }
   }
@@ -32,11 +47,11 @@ function getCityByPhonePrefix(prefix) {
 
 /**
  * Function to get the phone prefix by city name
- * @param {string} cityname - Phone prefix with no trailing 0
+ * @param {string} cityName - Phone prefix with no trailing 0
  * @returns {number} City's prefix without leading 0
  */
-function getPhonePrefixByCityName(cityname) {
-  const normalizedCityName = normalizeCityName(cityname);
+function getPhonePrefixByCityName(cityName) {
+  const normalizedCityName = normalizeCityName(cityName);
   for (const city of cities) {
     if (city.identifiable.name === normalizedCityName) {
       return city.phonePrefix;
@@ -47,11 +62,11 @@ function getPhonePrefixByCityName(cityname) {
 
 /**
  * Function to get the phone prefix of a phone number
- * @param {string} phonenumber - Phone prefix with no trailing 0
+ * @param {string} phoneNumber - Phone prefix with no trailing 0
  * @returns {number} City's prefix without leading 0
  */
-function getPrefixOfPhoneNumber(phonenumber) {
-  const normalizedNumber = normalizePhoneNumber(phonenumber);
+function getPrefixByPhoneNumber(phoneNumber) {
+  const normalizedNumber = normalizePhoneNumber(phoneNumber);
   const prefixLengths = [5, 4, 3, 2];
   for (const length of prefixLengths) {
     const prefix = Number(normalizedNumber.substring(0, length));
@@ -68,10 +83,10 @@ function getPrefixOfPhoneNumber(phonenumber) {
  * @param {string} cityname - German city name
  * @returns {bool} Indicator if city exists
  */
-function doesCityExistWithName(cityname) {
-  const normalizedCityName = normalizeCityName(cityname);
+function existsCityName(cityname) {
+  const identifiableCityName = createIdentifiableCityOrStateName(cityname);
   for (const city of cities) {
-    if (city.identifiable.name === normalizedCityName) {
+    if (city.identifiable.name === identifiableCityName) {
       return true;
     }
   }
@@ -83,8 +98,8 @@ function doesCityExistWithName(cityname) {
  * @param {string} cityname - Any german city name
  * @returns {string} Normalized cityname
  */
-function normalizeCityName(cityname) {
-  return cityname
+function createIdentifiableCityOrStateName(cityOrStateName) {
+  return cityOrStateName
     .toLowerCase()
     .replaceAll(/ä/g, 'ae')
     .replaceAll(/ö/g, 'oe')
@@ -104,7 +119,7 @@ function normalizeCityName(cityname) {
  * @param {string} phonenumber - Any german phone number
  * @returns {string} Normalized phonenumber
  */
-function normalizePhoneNumber(phonenumber) {
+function createIdentifiablePhoneNumber(phonenumber) {
   return phonenumber
     .replace(/\D/g, '')
     .replace(/^0/, '')
@@ -122,13 +137,4 @@ function normalizePhoneNumber(phonenumber) {
 /**
  * Export the functions to be consumable
  */
-module.exports = {
-  getCityByPhoneNumber,
-  getCityByPhonePrefix,
-  getPhonePrefixByCityName,
-  getPrefixOfPhoneNumber,
-  doesCityExistWithName,
-  normalizeCityName,
-  normalizePhoneNumber,
-  cities,
-};
+module.exports = {};
