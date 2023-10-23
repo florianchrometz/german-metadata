@@ -1,7 +1,33 @@
 'use strict';
 
-// City data array (Sample data for Frankfurt am Main)
-const cities = require('./data/cities.json');
+/**
+ * Cities data
+ */
+const ALL_CITIES = require('./data/cities.json');
+
+/**
+ * All city names based on all joint city.name, ordered by city name
+ * @type {array<string>}
+ */
+const ALL_CITY_NAMES = [...new Set(ALL_CITIES.map((city) => city.name))].sort();
+
+/**
+ * All postal codes based on all joint city.postalCodes, ordered by postal code
+ * @type {array<string>}
+ */
+const ALL_POSTAL_CODES = [...new Set(ALL_CITIES.map((city) => city.postalCodes))].flat().sort();
+
+/**
+ * All states based on all distinct joint city.state, ordered by state
+ * @type {array<string>}
+ */
+const ALL_STATES = [...new Set(ALL_CITIES.map((city) => city.state))].sort();
+
+/**
+ * All phone prefixes based on all distinct joint city.phonePrefix, ordered by phone prefix
+ * @type {array<number>}
+ * */
+const ALL_PHONE_PREFIXES = [...new Set(ALL_CITIES.map((city) => city.phonePrefix))].sort();
 
 /**
  * Function to get city object by city name
@@ -25,6 +51,13 @@ function getCitiesByPostalCode(postalCode) {}
 function getCitiesByState(state) {}
 
 /**
+ * Function to get a city objects by phone prefix
+ * @param {number} phonePrefix - Phone prefix with no trailing 0
+ * @returns {array<object>} - Array if matching city objects or null if not found
+ */
+function getCitiesByPhonePrefix(phonePrefix) {}
+
+/**
  * Function to get a city objects by phone number
  * @param {string} phoneNumber - Phonenumber in any german format
  * @returns {array<object>} - Array if matching city objects or null if not found
@@ -32,71 +65,121 @@ function getCitiesByState(state) {}
 function getCitiesByPhoneNumber(phoneNumber) {}
 
 /**
- * Function to get a city objects by phone prefix
+ * Function to get postal code by city name
+ * @param {string} cityName - Any german city name
+ * @returns {array<string>} - Postal codes or null if not found
+ */
+function getPostalCodesByCityName(cityName) {}
+
+/**
+ * Function to get postal codes by state
+ * @param {string} state - Any german state name
+ * @returns {array<string>} - Postal codes or null if not found
+ */
+function getPostalCodesByState(state) {}
+
+/**
+ * Function to get postal codes by phone prefix
  * @param {number} phonePrefix - Phone prefix with no trailing 0
- * @returns {array<object>} - Array if matching city objects or null if not found
+ * @returns {array<string>} - Postal codes or null if not found
  */
-function getCitiesByPhonePrefix(phonePrefix) {
-  for (const city of cities) {
-    if (city.phonePrefix === phonePrefix) {
-      return city;
-    }
-  }
-  return null;
-}
+function getPostalCodesByPhonePrefix(phonePrefix) {}
 
 /**
- * Function to get the phone prefix by city name
- * @param {string} cityName - Phone prefix with no trailing 0
- * @returns {number} City's prefix without leading 0
+ * Function to get postal codes by phone number
+ * @param {string} phoneNumber - Phonenumber in any german format
+ * @returns {array<string>} - Postal codes or null if not found
  */
-function getPhonePrefixByCityName(cityName) {
-  const normalizedCityName = normalizeCityName(cityName);
-  for (const city of cities) {
-    if (city.identifiable.name === normalizedCityName) {
-      return city.phonePrefix;
-    }
-  }
-  return null;
-}
+function getPostalCodesByPhoneNumber(phoneNumber) {}
 
 /**
- * Function to get the phone prefix of a phone number
- * @param {string} phoneNumber - Phone prefix with no trailing 0
- * @returns {number} City's prefix without leading 0
+ * Function to get state by city name
+ * @param {string} cityName - Any german city name
+ * @returns {string} - State name or null if not found
  */
-function getPrefixByPhoneNumber(phoneNumber) {
-  const normalizedNumber = normalizePhoneNumber(phoneNumber);
-  const prefixLengths = [5, 4, 3, 2];
-  for (const length of prefixLengths) {
-    const prefix = Number(normalizedNumber.substring(0, length));
-    const city = cities.find((p) => p.phonePrefix === prefix);
-    if (city) {
-      return city.phonePrefix;
-    }
-  }
-  return null;
-}
+function getStateByCityName(cityName) {}
 
 /**
- * Function to validate if a city exists by name (only major cities, no villages)
- * @param {string} cityname - German city name
- * @returns {bool} Indicator if city exists
+ * Function to get state by postal code
+ * @param {string} postalCode - Postal code in any german format
+ * @returns {string} - State name or null if not found
  */
-function existsCityName(cityname) {
-  const identifiableCityName = createIdentifiableCityOrStateName(cityname);
-  for (const city of cities) {
-    if (city.identifiable.name === identifiableCityName) {
-      return true;
-    }
-  }
-  return false;
-}
+function getStateByPostalCode(postalCode) {}
 
 /**
- * Helper function to normalize city names
- * @param {string} cityname - Any german city name
- * @returns {string} Normalized cityname
+ * Function to get state by phone prefix
+ * @param {number} phonePrefix - Phone prefix with no trailing 0
+ * @returns {string} - State name or null if not found
+ */
+function getStateByPhonePrefix(phonePrefix) {}
+
+/**
+ * Function to get state by phone number
+ * @param {string} phoneNumber - Phonenumber in any german format
+ * @returns {string} - State name or null if not found
+ */
+function getStateByPhoneNumber(phoneNumber) {}
+
+/**
+ * Function to get phone prefix by city name
+ * @param {string} cityName - Any german city name
+ * @returns {number} - Phone prefix or null if not found
+ */
+function getPhonePrefixByCityName(cityName) {}
+
+/**
+ * Function to get phone prefixes by postal code
+ * @param {string} postalCode - Postal code in any german format
+ * @returns {array<number>} - Phone prefixes or null if not found
+ */
+function getPhonePrefixesByPostalCode(postalCode) {}
+
+/**
+ * Function to get phone prefixes by state
+ * @param {string} state - Any german state name
+ * @returns {array<number>} - Phone prefixes or null if not found
+ */
+function getPhonePrefixesByState(state) {}
+
+/**
+ * Function to get phone prefix by phone number
+ * @param {string} phoneNumber - Phonenumber in any german format
+ * @returns {number} - Phone prefix or null if not found
+ */
+function getPrefixByPhoneNumber(phoneNumber) {}
+
+/**
+ * Function to validate if city name exists
+ * @param {string} cityName - Any german city name
+ * @returns {boolean} - true if city name exists, false if not
+ */
+function existsCityName(cityname) {}
+
+/**
+ * Function to validate if postal code exists
+ * @param {string} postalCode - Postal code in any german format
+ * @returns {boolean} - true if postal code exists, false if not
+ */
+function existsPostalCode(postalCode) {}
+
+/**
+ * Function to validate if state exists
+ * @param {string} state - Any german state name
+ * @returns {boolean} - true if state exists, false if not
+ */
+function existsState(state) {}
+
+/**
+ * Function to validate if phone prefix exists
+ * @param {number} phonePrefix - Phone prefix with no trailing 0
+ * @returns {boolean} - true if phone prefix exists, false if not
+ */
+function existsPhonePrefix(phonePrefix) {}
+
+/**
+ * Function to create identifiable city or state name
+ * @param {string} cityOrStateName - Any german city or state name
+ * @returns {string} Identifiable city or state name
  */
 function createIdentifiableCityOrStateName(cityOrStateName) {
   return cityOrStateName
@@ -115,9 +198,9 @@ function createIdentifiableCityOrStateName(cityOrStateName) {
 }
 
 /**
- * Helper function to normalize phone numbers
+ * Function to create identifiable phone number
  * @param {string} phonenumber - Any german phone number
- * @returns {string} Normalized phonenumber
+ * @returns {string} Identifiable phonenumber
  */
 function createIdentifiablePhoneNumber(phonenumber) {
   return phonenumber
@@ -135,6 +218,35 @@ function createIdentifiablePhoneNumber(phonenumber) {
 }
 
 /**
- * Export the functions to be consumable
+ * Export constants and functions to be consumable
  */
-module.exports = {};
+module.exports = {
+  ALL_CITIES,
+  ALL_CITY_NAMES,
+  ALL_POSTAL_CODES,
+  ALL_STATES,
+  ALL_PHONE_PREFIXES,
+  getCityByName,
+  getCitiesByPostalCode,
+  getCitiesByState,
+  getCitiesByPhonePrefix,
+  getCitiesByPhoneNumber,
+  getPostalCodesByCityName,
+  getPostalCodesByState,
+  getPostalCodesByPhonePrefix,
+  getPostalCodesByPhoneNumber,
+  getStateByCityName,
+  getStateByPostalCode,
+  getStateByPhonePrefix,
+  getStateByPhoneNumber,
+  getPhonePrefixByCityName,
+  getPhonePrefixesByPostalCode,
+  getPhonePrefixesByState,
+  getPrefixByPhoneNumber,
+  existsCityName,
+  existsPostalCode,
+  existsState,
+  existsPhonePrefix,
+  createIdentifiableCityOrStateName,
+  createIdentifiablePhoneNumber,
+};
