@@ -3,6 +3,7 @@
 A js package for easy consumption of german metadata such as phone prefixes and city names in german language with given special characters. This package uses data from OpenStreetMap and German GovData, please see chapter `Licensing Information` for more details.
 
 ---
+
 ## Usage
 
 ```
@@ -15,10 +16,13 @@ The german meta data package is based on an array that consists of single city o
 
 ```json
 {
-  "name": "Frankfurt am Main",
-  "prefix": 69,
-  "normalized": {
-    "name": "frankfurt_am_main"
+  "name": "Düren",
+  "postalCodes": ["52349", "52351", "52353", "52355"],
+  "state": "Nordrhein-Westfalen",
+  "phonePrefix": 2421,
+  "identifiable": {
+    "name": "dueren",
+    "state": "nordrhein7westfalen"
   }
 }
 ```
@@ -54,7 +58,9 @@ germanMetadata.cities
 -> [{cities}]
 
 ```
+
 ---
+
 ## Functions
 
 ### getCityByPhoneNumber(phonenumber) -> Object:City
@@ -90,6 +96,7 @@ Expects a phone number in any known german format as string without any further 
 This allows direct access to the data that is used by this package and returns the contents of `cities.json` which represents an array of cities.
 
 ---
+
 ## Licensing Information
 
 Make sure to apply propper attribution when using this package in public facing projects. As this project is using data from OpenStreetMap and German GovData Portal, the following licensing information applies:
