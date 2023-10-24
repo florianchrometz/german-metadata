@@ -1,131 +1,241 @@
 # german-metadata
 
-A js package for easy consumption of german metadata such as phone prefixes and city names in german language with given special characters.
+A js package for easy consumption of german metadata such as city names, postcodes, phone prefixes and states in german language with given special characters. This package uses data from OpenStreetMap and German GovData, please see chapter `Licensing Information` for more details.
 
-# Usage
+---
+
+## Usage
 
 ```
 npm install german-metadata
 ```
 
-## City objects
+### City objects
 
 The german meta data package is based on an array that consists of single city objects and a set of functions that allows to query them. Here is a basic city object sample for Frankfurt am Main. If a functions states to return a city object, this is what you will get.
 
 ```json
 {
-  "name": "Frankfurt am Main",
-  "prefix": 69,
-  "normalized": {
-    "name": "frankfurt_am_main"
+  "name": "Düren",
+  "postalCodes": ["52349", "52351", "52353", "52355"],
+  "state": "Nordrhein-Westfalen",
+  "phonePrefix": 2421,
+  "identifiable": {
+    "name": "dueren",
+    "state": "nordrhein7westfalen"
   }
 }
 ```
 
-## Samples
+### Samples
 
 ```js
 const germanMetadata = require('german-metadata');
 
-// get city by phone number, phone number does not need to be prepared
-// output will be a city object for Frankfurt am Main
-const cityForNumber = germanMetadata.getCityByPhoneNumber('069472111');
+// sample cityByName
+const cityByName = germanMetadata.getCityByName('Düren');
 
-// get city by phone prefix, prefix must be a number without leading 0
-// output will be a city object for Munich
-const cityForPrefix = germanMetadata.getCityByPhonePrefix(89);
+// sample citiesByPostalCode
+const citiesByPostalCode = germanMetadata.getCitiesByPostalCode('52349');
 
-//get phone prefix by city name, city name must be a string
-// output will be a number
-const phonePrefixByCity = germanMetadata.getPhonePrefixByCityName('Frankfurt am Main');
+// sample citiesByState
+const citiesByState = germanMetadata.getCitiesByState('Hessen');
 
-// get the specific number only prefix for a non cleaned phone number
-// output will be 69 as number
-const prefixForPhoneNumber = germanMetadata.getPrefixOfPhoneNumber('069472111');
+// sample citiesByPhonePrefix
+const citiesByPhonePrefix = germanMetadata.getCitiesByPhonePrefix(641);
 
-// validate if a city name is valid
-// output will be true
-const isValidCityName = germanMetadata.doesCityExistWithName('Frankfurt am Main');
+// sample citiesByPhoneNumber
+const citiesByPhoneNumber = germanMetadata.getCitiesByPhoneNumber('069123456');
 
-// normalize city names,
-// output will be a normalized city name string
-const validCityName = germanMetadata.normalizeCityName('Frankfurt am Main');
+// sample postalCodesByCityName
+const postalCodesByCityName = germanMetadata.getPostalCodesByCityName('Düren');
 
+// sample postalCodesByState
+const postalCodesByState = germanMetadata.getPostalCodesByState('Hessen');
 
-// normalize phone number,
-// output will be a normalized phone number as string
-const validPhoneNumber = germanMetadata.normalizePhoneNumber('069472111')
+// sample postalCodesByPhonePrefix
+const postalCodesByPhonePrefix = germanMetadata.getPostalCodesByPhonePrefix(641);
 
+// sample postalCodesByPhoneNumber
+const postalCodesByPhoneNumber = germanMetadata.getPostalCodesByPhoneNumber('069123456');
 
-//This gives access to the original cities data being used
-const cities = germanMetadata.cities
+// sample stateByCityName
+const stateByCityName = germanMetadata.getStateByCityName('München');
 
+// sample stateByPostalCode
+const stateByPostalCode = germanMetadata.getStateByPostalCode('80331');
+
+// sample stateByPhonePrefix
+const stateByPhonePrefix = germanMetadata.getStateByPhonePrefix(89);
+
+// sample stateByPhoneNumber
+const stateByPhoneNumber = germanMetadata.getStateByPhoneNumber('089123456');
+
+// sample phonePrefixByCityName
+const phonePrefixByCityName = germanMetadata.getPhonePrefixByCityName('Düren');
+
+// sample phonePrefixesByPostalCode
+const phonePrefixesByPostalCode = germanMetadata.getPhonePrefixesByPostalCode('52349');
+
+// sample phonePrefixesByState
+const phonePrefixesByState = germanMetadata.getPhonePrefixesByState('Hessen');
+
+// sample phonePrefixByPhoneNumber
+const phonePrefixByPhoneNumber = germanMetadata.getPhonePrefixByPhoneNumber('069123456');
+
+// sample isCityNameValid
+const isCityNameValid = germanMetadata.isCityNameValid('Düren');
+
+// sample isPostalCodeValid
+const isPostalCodeValid = germanMetadata.isPostalCodeValid('52349');
+
+// sample isStateValid
+const isStateValid = germanMetadata.isStateValid('Hessen');
+
+// sample isPhonePrefixValid
+const isPhonePrefixValid = germanMetadata.isPhonePrefixValid(641);
+
+// sample ALL_CITIES
+const ALL_CITIES = germanMetadata.ALL_CITIES;
+
+// sample ALL_CITY_NAMES
+const ALL_CITY_NAMES = germanMetadata.ALL_CITY_NAMES;
+
+// sample ALL_POSTAL_CODES
+const ALL_POSTAL_CODES = germanMetadata.ALL_POSTAL_CODES;
+
+// sample ALL_STATES
+const ALL_STATES = germanMetadata.ALL_STATES;
+
+// sample ALL_PHONE_PREFIXES
+const ALL_PHONE_PREFIXES = germanMetadata.ALL_PHONE_PREFIXES;
 ```
 
-# Functions
+---
 
-## find entries in data
+## Functions
 
-### `getCityByPhoneNumber(phonenumber)` -> `Object:City`
+### cityByName
 
-This function takes a phone number as input and returns the corresponding city object. The input phone number is normalized before the lookup.
+This function returns a city object by a given city name.
 
-### `getCityByPhonePrefix(prefix)` -> `Object:City`
+### citiesByPostalCode
 
-This function takes a phone prefix (area code) as input and returns the corresponding city object.
+This function returns an array of city objects by a given postal code.
 
-### `getPhonePrefixByCityName(cityname)` -> `Number:Prefix`
+### citiesByState
 
-This function takes a city name as input and returns the phone prefix (area code) associated with that city. The input city name is normalized before the lookup.
+This function returns an array of city objects by a given state.
 
-### `getPrefixOfPhoneNumber(phonenumber)` -> `Number:Prefix`
+### citiesByPhonePrefix
 
-This function takes a phone number as input and returns the phone prefix (area code) of that phone number. The input phone number is normalized before the lookup.
+This function returns an array of city objects by a given phone prefix.
 
-### `doesCityExistWithName(cityname)` -> `Boolean`
+### citiesByPhoneNumber
 
-This function takes a city name as input and returns true if the city exists in the data set. The input city name is normalized before the lookup.
+This function returns an array of city objects by a given phone number.
 
-## Helper Functions
+### postalCodesByCityName
 
-### `normalizeCityName(cityname)` -> Returns string representing a normalized city name
+This function returns an array of postal codes by a given city name.
 
-Expects a city name as string without any further preparation and normalizes it to a standard, comparable, format being all lowercase, no space, no special character version of the city name.
-Characters will be replaced with given schema: `Ää` -> `ae`, `Öö` -> `oe`, `Üü` -> `ue`, `ß` -> `ss`, ` ` -> `_`, `.` -> `__`, `-` -> `___`
+### postalCodesByState
 
-- `normalizeCityName("Berlin")` -> `berlin`
-- `normalizeCityName("München")` -> `muenchen`
-- `normalizeCityName("Fürstenberg Havel")` -> `fuerstenberg_havel`
-- `normalizeCityName("Bergholz-Rehbrücke")` -> `bergholz___rehbruecke`
+This function returns an array of postal codes by a given state.
 
-### `normalizePhoneNumber(phonenumber)` -> Returns a number representing a normalized phone number
+### postalCodesByPhonePrefix
 
-Expects a phone number in any known german format as string without any further preparation and normalizes it to s standard, comparable, format
-Every character that is not `0`,`1`,`2`,`3`,`4`,`5`,`6`,`7`,`8`,`9` as well as leading `0`'s or leading country code `49` are removed.
+This function returns an array of postal codes by a given phone prefix.
 
-- `normalizePhoneNumber("+49 (0) 4171-492482")` -> `4171492482`
-- `normalizePhoneNumber("07171492482")` -> `7171492482`
-- `normalizePhoneNumber("0049671-492482#433,222")` -> `671492482433222`
+### postalCodesByPhoneNumber
 
-### `cities` -> `[{...}]`
+This function returns an array of postal codes by a given phone number.
 
-This allows direct access to the data that is used by this package and returns the contents of `cities.json` which represents an array of cities.
+### stateByCityName
 
-# Licensing Information
+This function returns a state by a given city name.
+
+### stateByPostalCode
+
+This function returns a state by a given postal code.
+
+### stateByPhonePrefix
+
+This function returns a state by a given phone prefix.
+
+### stateByPhoneNumber
+
+This function returns a state by a given phone number.
+
+### phonePrefixByCityName
+
+This function returns a phone prefix by a given city name.
+
+### phonePrefixesByPostalCode
+
+This function returns an array of phone prefixes by a given postal code.
+
+### phonePrefixesByState
+
+This function returns an array of phone prefixes by a given state.
+
+### phonePrefixByPhoneNumber
+
+This function returns a phone prefix by a given phone number.
+
+### isCityNameValid
+
+This function returns true if a given city name is valid.
+
+### isPostalCodeValid
+
+This function returns true if a given postal code is valid.
+
+### isStateValid
+
+This function returns true if a given state is valid.
+
+### isPhonePrefixValid
+
+This function returns true if a given phone prefix is valid.
+
+### ALL_CITIES
+
+This constant contains an array of all cities in germany. Each city is represented by a city object.
+
+### ALL_CITY_NAMES
+
+This constant contains an array of all city names in germany.
+
+### ALL_POSTAL_CODES
+
+This constant contains an array of all postal codes in germany.
+
+### ALL_STATES
+
+This constant contains an array of all states in germany.
+
+### ALL_PHONE_PREFIXES
+
+This constant contains an array of all phone prefixes in germany.
+
+---
+
+## Licensing Information
 
 Make sure to apply propper attribution when using this package in public facing projects. As this project is using data from OpenStreetMap and German GovData Portal, the following licensing information applies:
 
-## Project Code License
+### Project Code License
 
 As per the terms of this project's license, the project code is released under the MIT License. You can find the full text of the MIT License in the `LICENSE` file within this repository.
 
-## Attribution to OpenStreetMap
+### Attribution to OpenStreetMap
 
 This package is using data provided by OpenStreetMap based on the Open Database License (ODbL).
 
 - OpenStreetMap: [https://www.openstreetmap.org](https://www.openstreetmap.org)
 
-## Attribution to GovData
+### Attribution to GovData
 
 This package is using data provided by GovData based on the German Data License (dl-de-by-2.0).
 
