@@ -1,6 +1,6 @@
 # german-metadata
 
-A js package for easy consumption of german metadata such as phone prefixes and city names in german language with given special characters. This package uses data from OpenStreetMap and German GovData, please see chapter `Licensing Information` for more details.
+A js package for easy consumption of german metadata such as city names, postcodes, phone prefixes and states in german language with given special characters. This package uses data from OpenStreetMap and German GovData, please see chapter `Licensing Information` for more details.
 
 ---
 
@@ -32,68 +32,192 @@ The german meta data package is based on an array that consists of single city o
 ```js
 const germanMetadata = require('german-metadata');
 
-// get city by phone number, phone number does not need to be prepared
-// output will be a city object for Frankfurt am Main
-germanMetadata.getCityByPhoneNumber('069472111');
--> "Frankfurt am Main"
+// sample cityByName
+const cityByName = germanMetadata.getCityByName('Düren');
 
-// get city by phone prefix, prefix must be a number without leading 0
-germanMetadata.getCityByPhonePrefix(89);
--> "München"
+// sample citiesByPostalCode
+const citiesByPostalCode = germanMetadata.getCitiesByPostalCode('52349');
 
-//get phone prefix by city name, city name must be a string
-germanMetadata.getPhonePrefixByCityName('Frankfurt am Main');
--> 69
+// sample citiesByState
+const citiesByState = germanMetadata.getCitiesByState('Hessen');
 
-// get the specific number only prefix for a non cleaned phone number
-germanMetadata.getPrefixOfPhoneNumber('069472111');
--> 69
+// sample citiesByPhonePrefix
+const citiesByPhonePrefix = germanMetadata.getCitiesByPhonePrefix(641);
 
-// validate if a city name is valid
-germanMetadata.doesCityExistWithName('Frankfurt am Main');
--> true
+// sample citiesByPhoneNumber
+const citiesByPhoneNumber = germanMetadata.getCitiesByPhoneNumber('069123456');
 
-//This gives access to the original cities data being used
-germanMetadata.cities
--> [{cities}]
+// sample postalCodesByCityName
+const postalCodesByCityName = germanMetadata.getPostalCodesByCityName('Düren');
 
+// sample postalCodesByState
+const postalCodesByState = germanMetadata.getPostalCodesByState('Hessen');
+
+// sample postalCodesByPhonePrefix
+const postalCodesByPhonePrefix = germanMetadata.getPostalCodesByPhonePrefix(641);
+
+// sample postalCodesByPhoneNumber
+const postalCodesByPhoneNumber = germanMetadata.getPostalCodesByPhoneNumber('069123456');
+
+// sample stateByCityName
+const stateByCityName = germanMetadata.getStateByCityName('München');
+
+// sample stateByPostalCode
+const stateByPostalCode = germanMetadata.getStateByPostalCode('80331');
+
+// sample stateByPhonePrefix
+const stateByPhonePrefix = germanMetadata.getStateByPhonePrefix(89);
+
+// sample stateByPhoneNumber
+const stateByPhoneNumber = germanMetadata.getStateByPhoneNumber('089123456');
+
+// sample phonePrefixByCityName
+const phonePrefixByCityName = germanMetadata.getPhonePrefixByCityName('Düren');
+
+// sample phonePrefixesByPostalCode
+const phonePrefixesByPostalCode = germanMetadata.getPhonePrefixesByPostalCode('52349');
+
+// sample phonePrefixesByState
+const phonePrefixesByState = germanMetadata.getPhonePrefixesByState('Hessen');
+
+// sample phonePrefixByPhoneNumber
+const phonePrefixByPhoneNumber = germanMetadata.getPhonePrefixByPhoneNumber('069123456');
+
+// sample isCityNameValid
+const isCityNameValid = germanMetadata.isCityNameValid('Düren');
+
+// sample isPostalCodeValid
+const isPostalCodeValid = germanMetadata.isPostalCodeValid('52349');
+
+// sample isStateValid
+const isStateValid = germanMetadata.isStateValid('Hessen');
+
+// sample isPhonePrefixValid
+const isPhonePrefixValid = germanMetadata.isPhonePrefixValid(641);
+
+// sample ALL_CITIES
+const ALL_CITIES = germanMetadata.ALL_CITIES;
+
+// sample ALL_CITY_NAMES
+const ALL_CITY_NAMES = germanMetadata.ALL_CITY_NAMES;
+
+// sample ALL_POSTAL_CODES
+const ALL_POSTAL_CODES = germanMetadata.ALL_POSTAL_CODES;
+
+// sample ALL_STATES
+const ALL_STATES = germanMetadata.ALL_STATES;
+
+// sample ALL_PHONE_PREFIXES
+const ALL_PHONE_PREFIXES = germanMetadata.ALL_PHONE_PREFIXES;
 ```
 
 ---
 
 ## Functions
 
-### getCityByPhoneNumber(phonenumber) -> Object:City
+### cityByName
 
-This function takes a phone number as input and returns the corresponding city object. The input phone number is normalized before the lookup.
+This function returns a city object by a given city name.
 
-### getCityByPhonePrefix(prefix)` -> Object:City
+### citiesByPostalCode
 
-This function takes a phone prefix (area code) as input and returns the corresponding city object.
+This function returns an array of city objects by a given postal code.
 
-### getPhonePrefixByCityName(cityname) -> Number:Prefix
+### citiesByState
 
-This function takes a city name as input and returns the phone prefix (area code) associated with that city. The input city name is normalized before the lookup.
+This function returns an array of city objects by a given state.
 
-### getPrefixOfPhoneNumber(phonenumber) -> Number:Prefix
+### citiesByPhonePrefix
 
-This function takes a phone number as input and returns the phone prefix (area code) of that phone number. The input phone number is normalized before the lookup.
+This function returns an array of city objects by a given phone prefix.
 
-### doesCityExistWithName(cityname) -> Boolean
+### citiesByPhoneNumber
 
-This function takes a city name as input and returns true if the city exists in the data set. The input city name is normalized before the lookup.
+This function returns an array of city objects by a given phone number.
 
-### normalizeCityName(cityname) -> String:Normalized Name
+### postalCodesByCityName
 
-Expects a city name as string without any further preparation and normalizes it to a standard, comparable, format being all lowercase, no space, no special character version of the city name.
+This function returns an array of postal codes by a given city name.
 
-### normalizePhoneNumber(phonenumber) -> String:Normalized Phone Number
+### postalCodesByState
 
-Expects a phone number in any known german format as string without any further preparation and normalizes it to s standard, comparable, format.
+This function returns an array of postal codes by a given state.
 
-### cities -> [{...}]
+### postalCodesByPhonePrefix
 
-This allows direct access to the data that is used by this package and returns the contents of `cities.json` which represents an array of cities.
+This function returns an array of postal codes by a given phone prefix.
+
+### postalCodesByPhoneNumber
+
+This function returns an array of postal codes by a given phone number.
+
+### stateByCityName
+
+This function returns a state by a given city name.
+
+### stateByPostalCode
+
+This function returns a state by a given postal code.
+
+### stateByPhonePrefix
+
+This function returns a state by a given phone prefix.
+
+### stateByPhoneNumber
+
+This function returns a state by a given phone number.
+
+### phonePrefixByCityName
+
+This function returns a phone prefix by a given city name.
+
+### phonePrefixesByPostalCode
+
+This function returns an array of phone prefixes by a given postal code.
+
+### phonePrefixesByState
+
+This function returns an array of phone prefixes by a given state.
+
+### phonePrefixByPhoneNumber
+
+This function returns a phone prefix by a given phone number.
+
+### isCityNameValid
+
+This function returns true if a given city name is valid.
+
+### isPostalCodeValid
+
+This function returns true if a given postal code is valid.
+
+### isStateValid
+
+This function returns true if a given state is valid.
+
+### isPhonePrefixValid
+
+This function returns true if a given phone prefix is valid.
+
+### ALL_CITIES
+
+This constant contains an array of all cities in germany. Each city is represented by a city object.
+
+### ALL_CITY_NAMES
+
+This constant contains an array of all city names in germany.
+
+### ALL_POSTAL_CODES
+
+This constant contains an array of all postal codes in germany.
+
+### ALL_STATES
+
+This constant contains an array of all states in germany.
+
+### ALL_PHONE_PREFIXES
+
+This constant contains an array of all phone prefixes in germany.
 
 ---
 
