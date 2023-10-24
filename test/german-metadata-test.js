@@ -47,25 +47,105 @@ describe('german-metadata-test', function () {
     });
   });
 
-  // test cityByName with 5 positive and 5 negative tests
-  // test citiesByPostalCode with 5 positive and 5 negative tests
-  // test citiesByState with 5 positive and 5 negative tests
-  // test citiesByPhonePrefix with 5 positive and 5 negative tests
-  // test citiesByPhoneNumber with 5 positive and 5 negative tests
-  // test postalCodesByCityName with 5 positive and 5 negative tests
-  // test postalCodesByState with 5 positive and 5 negative tests
-  // test postalCodesByPhonePrefix with 5 positive and 5 negative tests
-  // test postalCodesByPhoneNumber with 5 positive and 5 negative tests
-  // test stateByCityName with 5 positive and 5 negative tests
-  // test stateByPostalCode with 5 positive and 5 negative tests
-  // test stateByPhonePrefix with 5 positive and 5 negative tests
-  // test stateByPhoneNumber with 5 positive and 5 negative tests
-  // test phonePrefixByCityName with 5 positive and 5 negative tests
-  // test phonePrefixesByPostalCode with 5 positive and 5 negative tests
-  // test phonePrefixesByState with 5 positive and 5 negative tests
-  // test phonePrefixByPhoneNumber with 5 positive and 5 negative tests
-  // test isCityNameValid with 5 positive and 5 negative tests
-  // test isPostalCodeValid with 5 positive and 5 negative tests
-  // test isStateValid with 5 positive and 5 negative tests
-  // test isPhonePrefixValid with 5 positive and 5 negative tests
+  // test cityByName with 3 positive and 3 negative tests
+  it('cityByName', function () {
+    //positive tests
+    expect(germanMetadata.cityByName('Berlin')).to.be.an('object');
+    expect(germanMetadata.cityByName('Hamburg')).to.be.an('object');
+    expect(germanMetadata.cityByName('Nürnberg')).to.be.an('object');
+    //negative tests
+    expect(germanMetadata.cityByName('')).to.be.null;
+    expect(germanMetadata.cityByName('Democity')).to.be.null;
+    expect(germanMetadata.cityByName('Frankfurt aM')).to.be.null;
+  });
+
+  // test citiesByPostalCode with 3 negative tests
+  // test citiesByState with 3 positive and 3 negative tests
+  // test citiesByPhonePrefix with 3 positive and 3 negative tests
+  // test citiesByPhoneNumber with 3 positive and 3 negative tests
+  // test postalCodesByCityName with 3 positive and 3 negative tests
+  // test postalCodesByState with 3 positive and 3 negative tests
+  // test postalCodesByPhonePrefix with 3 positive and 3 negative tests
+  // test postalCodesByPhoneNumber with 3 positive and 3 negative tests
+  // test stateByCityName with 3 positive and 3 negative tests
+  // test stateByPostalCode with 3 positive and 3 negative tests
+  // test stateByPhonePrefix with 3 positive and 3 negative tests
+  // test stateByPhoneNumber with 3 positive and 3 negative tests
+  // test phonePrefixByCityName with 3 positive and 3 negative tests
+  // test phonePrefixesByPostalCode with 3 positive and 3 negative tests
+  // test phonePrefixesByState with 3 positive and 3 negative tests
+  it('phonePrefixesByState', function () {
+    //positive tests
+    expect(germanMetadata.phonePrefixesByState('Bayern')).to.be.an('array');
+    expect(germanMetadata.phonePrefixesByState('Baden-Württemberg')).to.be.an('array');
+    expect(germanMetadata.phonePrefixesByState('Nordrhein-Westfalen')).to.be.an('array');
+    //negative tests
+    expect(germanMetadata.phonePrefixesByState('')).to.be.empty;
+    expect(germanMetadata.phonePrefixesByState('Demostate')).to.be.empty;
+    expect(germanMetadata.phonePrefixesByState('Frankfurt aM')).to.be.empty;
+  });
+
+  // test phonePrefixByPhoneNumber with 3 positive and 3 negative tests
+  it('phonePrefixByPhoneNumber', function () {
+    //positive tests
+    expect(germanMetadata.phonePrefixByPhoneNumber('+49 (0) 30 123456')).to.be.a('number');
+    expect(germanMetadata.phonePrefixByPhoneNumber('0049 069 123456')).to.be.a('number');
+    expect(germanMetadata.phonePrefixByPhoneNumber('0641123456')).to.be.a('number');
+    //negative tests
+    expect(germanMetadata.phonePrefixByPhoneNumber('44299222')).to.be.equal(-1);
+    expect(germanMetadata.phonePrefixByPhoneNumber('+12')).to.be.equal(-1);
+    expect(germanMetadata.phonePrefixByPhoneNumber('44444')).to.be.equal(-1);
+  });
+
+  // test isCityNameValid with 3 positive and 3 negative tests
+  it('isCityNameValid', function () {
+    //positive tests
+    expect(germanMetadata.isCityNameValid('Berlin')).to.be.true;
+    expect(germanMetadata.isCityNameValid('Hamburg')).to.be.true;
+    expect(germanMetadata.isCityNameValid('Nürnberg')).to.be.true;
+    //negative tests
+    expect(germanMetadata.isCityNameValid('')).to.be.false;
+    expect(germanMetadata.isCityNameValid('Democity')).to.be.false;
+    expect(germanMetadata.isCityNameValid('Frankfurt aM')).to.be.false;
+  });
+
+  // test isPostalCodeValid with 3 positive and 3 negative tests
+  it('isPostalCodeValid', function () {
+    //positive tests
+    expect(germanMetadata.isPostalCodeValid('01067')).to.be.true;
+    expect(germanMetadata.isPostalCodeValid('01069')).to.be.true;
+    expect(germanMetadata.isPostalCodeValid('01097')).to.be.true;
+    //negative tests
+    expect(germanMetadata.isPostalCodeValid('')).to.be.false;
+    expect(germanMetadata.isPostalCodeValid(1067)).to.be.false;
+    expect(germanMetadata.isPostalCodeValid('1234')).to.be.false;
+  });
+
+  // test isStateValid with 3 positive and 3 negative tests
+  it('isStateValid', function () {
+    //positive tests
+    expect(germanMetadata.isStateValid('Bayern')).to.be.true;
+    expect(germanMetadata.isStateValid('Baden-Württemberg')).to.be.true;
+    expect(germanMetadata.isStateValid('Nordrhein-Westfalen')).to.be.true;
+    //negative tests
+    expect(germanMetadata.isStateValid('')).to.be.false;
+    expect(germanMetadata.isStateValid('Demostate')).to.be.false;
+    expect(germanMetadata.isStateValid('Frankfurt aM')).to.be.false;
+  });
+
+  // test isPhonePrefixValid with 3 positive and 3 negative tests
+  it('isPhonePrefixValid', function () {
+    //positive tests
+    expect(germanMetadata.isPhonePrefixValid(30)).to.be.true;
+    expect(germanMetadata.isPhonePrefixValid(69)).to.be.true;
+    expect(germanMetadata.isPhonePrefixValid(641)).to.be.true;
+    expect(germanMetadata.isPhonePrefixValid(89)).to.be.true;
+    expect(germanMetadata.isPhonePrefixValid(911)).to.be.true;
+    //negative tests
+    expect(germanMetadata.isPhonePrefixValid(-1)).to.be.false;
+    expect(germanMetadata.isPhonePrefixValid(999)).to.be.false;
+    expect(germanMetadata.isPhonePrefixValid('3333')).to.be.false;
+    expect(germanMetadata.isPhonePrefixValid('')).to.be.false;
+    expect(germanMetadata.isPhonePrefixValid('abc')).to.be.false;
+  });
 });
