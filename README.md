@@ -35,189 +35,279 @@ const germanMetadata = require('german-metadata');
 // sample cityByName
 const cityByName = germanMetadata.getCityByName('Düren');
 
-// sample citiesByPostalCode
-const citiesByPostalCode = germanMetadata.getCitiesByPostalCode('52349');
-
-// sample citiesByState
-const citiesByState = germanMetadata.getCitiesByState('Hessen');
-
-// sample citiesByPhonePrefix
-const citiesByPhonePrefix = germanMetadata.getCitiesByPhonePrefix(641);
-
-// sample citiesByPhoneNumber
-const citiesByPhoneNumber = germanMetadata.getCitiesByPhoneNumber('069123456');
-
-// sample postalCodesByCityName
-const postalCodesByCityName = germanMetadata.getPostalCodesByCityName('Düren');
-
 // sample postalCodesByState
 const postalCodesByState = germanMetadata.getPostalCodesByState('Hessen');
 
-// sample postalCodesByPhonePrefix
-const postalCodesByPhonePrefix = germanMetadata.getPostalCodesByPhonePrefix(641);
-
-// sample postalCodesByPhoneNumber
-const postalCodesByPhoneNumber = germanMetadata.getPostalCodesByPhoneNumber('069123456');
-
-// sample stateByCityName
-const stateByCityName = germanMetadata.getStateByCityName('München');
-
-// sample stateByPostalCode
-const stateByPostalCode = germanMetadata.getStateByPostalCode('80331');
-
-// sample stateByPhonePrefix
-const stateByPhonePrefix = germanMetadata.getStateByPhonePrefix(89);
-
-// sample stateByPhoneNumber
-const stateByPhoneNumber = germanMetadata.getStateByPhoneNumber('089123456');
-
-// sample phonePrefixByCityName
-const phonePrefixByCityName = germanMetadata.getPhonePrefixByCityName('Düren');
-
-// sample phonePrefixesByPostalCode
-const phonePrefixesByPostalCode = germanMetadata.getPhonePrefixesByPostalCode('52349');
-
-// sample phonePrefixesByState
-const phonePrefixesByState = germanMetadata.getPhonePrefixesByState('Hessen');
-
-// sample phonePrefixByPhoneNumber
-const phonePrefixByPhoneNumber = germanMetadata.getPhonePrefixByPhoneNumber('069123456');
-
-// sample isCityNameValid
-const isCityNameValid = germanMetadata.isCityNameValid('Düren');
-
 // sample isPostalCodeValid
 const isPostalCodeValid = germanMetadata.isPostalCodeValid('52349');
-
-// sample isStateValid
-const isStateValid = germanMetadata.isStateValid('Hessen');
-
-// sample isPhonePrefixValid
-const isPhonePrefixValid = germanMetadata.isPhonePrefixValid(641);
-
-// sample ALL_CITIES
-const ALL_CITIES = germanMetadata.ALL_CITIES;
-
-// sample ALL_CITY_NAMES
-const ALL_CITY_NAMES = germanMetadata.ALL_CITY_NAMES;
-
-// sample ALL_POSTAL_CODES
-const ALL_POSTAL_CODES = germanMetadata.ALL_POSTAL_CODES;
-
-// sample ALL_STATES
-const ALL_STATES = germanMetadata.ALL_STATES;
-
-// sample ALL_PHONE_PREFIXES
-const ALL_PHONE_PREFIXES = germanMetadata.ALL_PHONE_PREFIXES;
 ```
 
----
+Samples for each function are provided in the chapter `All functions with samples`
 
-## Functions
+## All functions with samples
+
+Jump to function:
+
+- [cityByName](#citybyname)
+- [citiesByPostalCode](#citiesbypostalcode)
+- [citiesByState](#citiesbystate)
+- [citiesByPhonePrefix](#citiesbyphoneprefix)
+- [citiesByPhoneNumber](#citiesbyphonenumber)
+- [postalCodesByCityName](#postalcodesbycityname)
+- [postalCodesByState](#postalcodesbystate)
+- [postalCodesByPhonePrefix](#postalcodesbyphoneprefix)
+- [postalCodesByPhoneNumber](#postalcodesbyphonenumber)
+- [stateByCityName](#statebycityname)
+- [stateByPostalCode](#statebypostalcode)
+- [stateByPhonePrefix](#statebyphoneprefix)
+- [stateByPhoneNumber](#statebyphonenumber)
+- [phonePrefixByCityName](#phoneprefixbycityname)
+- [phonePrefixesByPostalCode](#phoneprefixesbypostalcode)
+- [phonePrefixesByState](#phoneprefixesbystate)
+- [phonePrefixByPhoneNumber](#phoneprefixbyphonenumber)
+- [isCityNameValid](#iscitynamevalid)
+- [isPostalCodeValid](#ispostalcodevalid)
+- [isStateValid](#isstatevalid)
+- [isPhonePrefixValid](#isphoneprefixvalid)
+- [ALL_CITIES](#all_cities)
+- [ALL_CITY_NAMES](#all_city_names)
+- [ALL_POSTAL_CODES](#all_postal_codes)
+- [ALL_STATES](#all_states)
+- [ALL_PHONE_PREFIXES](#all_phone_prefixes)
 
 ### cityByName
 
-This function returns a city object by a given city name.
+Returns a city object by a given city name.
+
+```js
+const cityByName = germanMetadata.getCityByName('Düren');
+// -> {"name":"Düren",postalCodes[...],...}
+```
 
 ### citiesByPostalCode
 
-This function returns an array of city objects by a given postal code.
+Returns an array of city objects by a given postal code.
+
+```js
+const citiesByPostalCode = germanMetadata.getCitiesByPostalCode('52349');
+// -> [{"name":"Düren",postalCodes[...],...},...]
+```
 
 ### citiesByState
 
-This function returns an array of city objects by a given state.
+Returns an array of city objects by a given state.
+
+```js
+const citiesByState = germanMetadata.getCitiesByState('Hessen');
+// -> [{"name":"Frankfurt am Main",postalCodes[...],...},...]
+```
 
 ### citiesByPhonePrefix
 
-This function returns an array of city objects by a given phone prefix.
+Returns an array of city objects by a given phone prefix.
+
+```js
+const citiesByPhonePrefix = germanMetadata.getCitiesByPhonePrefix(641);
+// -> [{"name":"Gießen",postalCodes[...],...},...]
+```
 
 ### citiesByPhoneNumber
 
-This function returns an array of city objects by a given phone number.
+Returns an array of city objects by a given phone number.
+
+```js
+const citiesByPhoneNumber = germanMetadata.getCitiesByPhoneNumber('069123456');
+// -> [{"name":"Frankfurt am Main",postalCodes[...],...},...]
+```
 
 ### postalCodesByCityName
 
-This function returns an array of postal codes by a given city name.
+Returns an array of postal codes by a given city name.
+
+```js
+const postalCodesByCityName = germanMetadata.getPostalCodesByCityName('Düren');
+// -> ["52349","52351","52353","52355"]
+```
 
 ### postalCodesByState
 
-This function returns an array of postal codes by a given state.
+Returns an array of postal codes by a given state.
+
+```js
+const postalCodesByState = germanMetadata.getPostalCodesByState('Hessen');
+// -> ["60306","60308","60310","60311","60313",...]
+```
 
 ### postalCodesByPhonePrefix
 
-This function returns an array of postal codes by a given phone prefix.
+Returns an array of postal codes by a given phone prefix.
+
+```js
+const postalCodesByPhonePrefix = germanMetadata.getPostalCodesByPhonePrefix(641);
+// -> ["35390","35392","35394","35396","35398"]
+```
 
 ### postalCodesByPhoneNumber
 
-This function returns an array of postal codes by a given phone number.
+Returns an array of postal codes by a given phone number.
+
+```js
+const postalCodesByPhoneNumber = germanMetadata.getPostalCodesByPhoneNumber('069123456');
+// -> ["60306","60308","60310","60311","60313",...]
+```
 
 ### stateByCityName
 
-This function returns a state by a given city name.
+Returns a state by a given city name.
+
+```js
+const stateByCityName = germanMetadata.getStateByCityName('München');
+// -> "Bayern"
+```
 
 ### stateByPostalCode
 
-This function returns a state by a given postal code.
+Returns a state by a given postal code.
+
+```js
+const stateByPostalCode = germanMetadata.getStateByPostalCode('80331');
+// -> "Bayern"
+```
 
 ### stateByPhonePrefix
 
-This function returns a state by a given phone prefix.
+Returns a state by a given phone prefix.
+
+```js
+const stateByPhonePrefix = germanMetadata.getStateByPhonePrefix(89);
+// -> "Bayern"
+```
 
 ### stateByPhoneNumber
 
-This function returns a state by a given phone number.
+Returns a state by a given phone number.
+
+```js
+const stateByPhoneNumber = germanMetadata.getStateByPhoneNumber('069123456');
+// -> "Hessen"
+```
 
 ### phonePrefixByCityName
 
-This function returns a phone prefix by a given city name.
+Returns a phone prefix by a given city name.
+
+```js
+const phonePrefixByCityName = germanMetadata.getPhonePrefixByCityName('Düren');
+// -> 2421
+```
 
 ### phonePrefixesByPostalCode
 
-This function returns an array of phone prefixes by a given postal code.
+Returns an array of phone prefixes by a given postal code.
+
+```js
+const phonePrefixesByPostalCode = germanMetadata.getPhonePrefixesByPostalCode('52349');
+// -> [2421,2422,2423,2424,2425,2426,2427,2428,2429]
+```
 
 ### phonePrefixesByState
 
-This function returns an array of phone prefixes by a given state.
+Returns an array of phone prefixes by a given state.
+
+```js
+const phonePrefixesByState = germanMetadata.getPhonePrefixesByState('Hessen');
+// -> [69,641,...]
+```
 
 ### phonePrefixByPhoneNumber
 
-This function returns a phone prefix by a given phone number.
+Returns a phone prefix by a given phone number.
+
+```js
+const phonePrefixByPhoneNumber = germanMetadata.getPhonePrefixByPhoneNumber('069123456');
+// -> 69
+```
 
 ### isCityNameValid
 
-This function returns true if a given city name is valid.
+Returns true if a given city name is valid.
+
+```js
+const isCityNameValid = germanMetadata.isCityNameValid('Düren');
+// -> true
+```
 
 ### isPostalCodeValid
 
-This function returns true if a given postal code is valid.
+Returns true if a given postal code is valid.
+
+```js
+const isPostalCodeValid = germanMetadata.isPostalCodeValid('52349');
+// -> true
+```
 
 ### isStateValid
 
-This function returns true if a given state is valid.
+Returns true if a given state is valid.
+
+```js
+const isStateValid = germanMetadata.isStateValid('Hessen');
+// -> true
+```
 
 ### isPhonePrefixValid
 
-This function returns true if a given phone prefix is valid.
+Returns true if a given phone prefix is valid.
+
+```js
+const isPhonePrefixValid = germanMetadata.isPhonePrefixValid(641);
+// -> true
+```
 
 ### ALL_CITIES
 
 This constant contains an array of all cities in germany. Each city is represented by a city object.
 
+```js
+const ALL_CITIES = germanMetadata.ALL_CITIES;
+// -> [{"name":"Düren",postalCodes[...],...},...]
+```
+
 ### ALL_CITY_NAMES
 
 This constant contains an array of all city names in germany.
+
+```js
+const ALL_CITY_NAMES = germanMetadata.ALL_CITY_NAMES;
+// -> ["Düren","Aachen",...]
+```
 
 ### ALL_POSTAL_CODES
 
 This constant contains an array of all postal codes in germany.
 
+```js
+const ALL_POSTAL_CODES = germanMetadata.ALL_POSTAL_CODES;
+// -> ["52349","52351","52353","52355",...]
+```
+
 ### ALL_STATES
 
 This constant contains an array of all states in germany.
 
+```js
+const ALL_STATES = germanMetadata.ALL_STATES;
+// -> ["Baden-Württemberg","Bayern","Berlin","Brandenburg",...]
+```
+
 ### ALL_PHONE_PREFIXES
 
 This constant contains an array of all phone prefixes in germany.
+
+```js
+const ALL_PHONE_PREFIXES = germanMetadata.ALL_PHONE_PREFIXES;
+// -> [2421,2422,2423,2424,2425,2426,2427,2428,2429,...]
+```
 
 ---
 
